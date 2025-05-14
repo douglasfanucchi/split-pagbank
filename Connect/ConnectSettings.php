@@ -8,6 +8,8 @@ class ConnectSettings
 {
     private static $instance = null;
 
+    protected static string $env_key = 'pagbank_connect_environment';
+
     public static function get_instance()
     {
         if (null === self::$instance) {
@@ -19,6 +21,29 @@ class ConnectSettings
 
     private function __construct() {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('personal_options', array($this, 'render_select_environment'));
+        add_action('personal_options_update', array($this, 'save_select_environment'));
+    }
+
+    public function save_select_environment($user_id) {
+        if (!current_user_can('edit_user', $user_id)) {
+            return;
+        }
+
+        if (!empty($_POST[self::$env_key])) {
+            update_user_meta(
+                $user_id,
+                self::$env_key,
+                sanitize_text_field($_POST[self::$env_key])
+            );
+        }
+    }
+
+    public function render_select_environment($user) {
+        echo pagbank_split_payment()->get_template('select-environment', [
+            'field_key' => self::$env_key,
+            'value' => get_user_meta($user->ID, self::$env_key, true),
+        ]);
     }
 
     public function enqueue_scripts() {
