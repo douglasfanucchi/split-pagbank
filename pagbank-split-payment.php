@@ -13,3 +13,33 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+function pagbank_split_payment() {
+    return PagBank_Split_Payment::get_instance();
+}
+
+class PagBank_Split_Payment {
+    public string $file;
+    
+    private function __construct() {
+        $this->load_modules();
+
+        $this->file = __FILE__;
+    }
+
+    protected function load_modules() {
+        require_once __DIR__ . '/Connect/ConnectSettings.php';
+    }
+
+    public static function get_instance() {
+        static $instance = null;
+
+        if ( null === $instance ) {
+            $instance = new self();
+        }
+
+        return $instance;
+    }
+}
+
+pagbank_split_payment();
