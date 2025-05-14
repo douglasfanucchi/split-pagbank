@@ -40,6 +40,20 @@ class PagBank_Split_Payment {
 
         return $instance;
     }
+
+    public function get_template($template, $data = []) {
+        extract($data);
+        $template_path = __DIR__ . '/templates/' . $template . '.php';
+        $template_path = apply_filters('pagbank_split_payment_template_path', $template_path);
+
+        if ( file_exists( $template_path ) ) {
+            ob_start();
+            include $template_path;
+            return ob_get_clean();
+        }
+
+        return '';
+    }
 }
 
 pagbank_split_payment();
