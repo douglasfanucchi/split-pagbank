@@ -7728,7 +7728,7 @@ document.querySelectorAll("[data-pagbank-connect-environment-select]").forEach((
       o(), l();
       const { data: g } = await J.get(woocommerce_admin.ajax_url, {
         params: {
-          action: "pagbank_woocommerce_oauth_status",
+          action: "split_pagbank_woocommerce_oauth_status",
           environment: a.value,
           nonce: f.getAttribute("data-pagbank-connect-nonce")
         }
@@ -7755,7 +7755,7 @@ document.querySelectorAll("[data-connect-application-id]").forEach((f) => {
         n.classList.add("disabled"), n.setAttribute("disabled", "disabled");
         const { data: c } = await J.get(woocommerce_admin.ajax_url, {
           params: {
-            action: "pagbank_woocommerce_oauth_url",
+            action: "split_pagbank_woocommerce_oauth_url",
             id: e,
             nonce: s,
             environment: t
