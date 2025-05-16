@@ -28,6 +28,7 @@ class PagBank_Split_Payment {
     }
 
     protected function load_modules() {
+        require_once __DIR__ . '/includes/Metaboxes/ProductRecipient.php';
         require_once __DIR__ . '/includes/Connect/ConnectSettings.php';
         require_once __DIR__ . '/includes/Connect/ConnectAjaxApi.php';
     }
