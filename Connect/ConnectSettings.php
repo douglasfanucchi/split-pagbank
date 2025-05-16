@@ -39,6 +39,10 @@ class ConnectSettings
         ]);
     }
 
+    public static function get_connect_key(string $environment): string {
+        return $environment . '_' . self::$connect_key;
+    }
+
     public function save_select_environment($user_id) {
         if (!current_user_can('edit_user', $user_id)) {
             return;
