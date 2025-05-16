@@ -4,5 +4,8 @@
   },
   "scripts": {
     "makepot": "wp i18n make-pot ."
+  },
+  "require": {
+    "htmlburger/carbon-fields": "^3.6"
   }
 }
