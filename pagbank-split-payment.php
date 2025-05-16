@@ -31,6 +31,7 @@ class PagBank_Split_Payment {
         require_once __DIR__ . '/includes/Metaboxes/ProductRecipient.php';
         require_once __DIR__ . '/includes/Connect/ConnectSettings.php';
         require_once __DIR__ . '/includes/Connect/ConnectAjaxApi.php';
+        require_once __DIR__ . '/includes/Split/SplitPayment.php';
     }
 
     public static function get_instance() {
