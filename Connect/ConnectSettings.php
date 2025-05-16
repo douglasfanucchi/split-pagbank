@@ -2,6 +2,8 @@
 
 namespace PagBank_Split_Payment\Connect;
 
+use PagBank_WooCommerce\Presentation\Connect;
+
 defined( 'ABSPATH' ) || exit;
 
 class ConnectSettings
@@ -9,6 +11,7 @@ class ConnectSettings
     private static $instance = null;
 
     protected static string $env_key = 'pagbank_connect_environment';
+    public static string $connect_key = 'pagbank_connect_data';
 
     public static function get_instance()
     {
@@ -23,6 +26,17 @@ class ConnectSettings
         add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('personal_options', array($this, 'render_select_environment'));
         add_action('personal_options_update', array($this, 'save_select_environment'));
+        add_action('personal_options', array($this, 'render_connect_button'));
+    }
+
+    public function render_connect_button($user) {
+        echo pagbank_split_payment()->get_template('connect-button', [
+            'environment' => get_user_meta($user->ID, self::$env_key, true),
+            'applications' => Connect::get_connect_applications(),
+            'nonce' => wp_create_nonce( 'pagbank_woocommerce_oauth' ),
+            'env_key' => self::$env_key,
+            'field_key' => self::$connect_key,
+        ]);
     }
 
     public function save_select_environment($user_id) {
@@ -64,6 +78,15 @@ class ConnectSettings
         wp_scripts()->add_data( 'pagbank-split-payment', 'pagbank_script', true );
 
         wp_enqueue_script( 'pagbank-split-payment' );
+
+        wp_register_style(
+			'pagbank-for-woocommerce-admin-settings',
+			plugins_url( 'styles/admin-fields.css', PAGBANK_WOOCOMMERCE_FILE_PATH ),
+			array(),
+			PAGBANK_WOOCOMMERCE_VERSION,
+			'all'
+		);
+		wp_enqueue_style( 'pagbank-for-woocommerce-admin-settings' );
     }
 }
 
