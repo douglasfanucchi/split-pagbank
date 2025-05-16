@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:     PagBank Split Payment
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Plugin URI:      https://github.com/douglasfanucchi/split-pagbank
+ * Description:     Plugin to handle PagBank split payment for WooCommerce.
+ * Author:          Douglas Fanucchi
+ * Author URI:      https://github.com/douglasfanucchi
  * Text Domain:     pagbank-split-payment
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         1.0.0
  *
  * @package         PagBank_Split_Payment
  */
