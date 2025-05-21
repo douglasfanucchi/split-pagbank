@@ -31,7 +31,7 @@ class SplitPayment {
         $receiversRequest = $this->receivers_to_request($receivers, $order->get_total());
         $receiversRequest[] = $this->get_main_receiver($receiversRequest, $gateway->get_option('environment'));
 
-        $data['charges']['splits'] = [
+        $data['charges'][0]['splits'] = [
             'method' => 'PERCENTAGE',
             'receivers' => $receiversRequest,
         ];
